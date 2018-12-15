@@ -7,8 +7,7 @@
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=BioRhyme" rel="stylesheet">
-    <!-- CSS Style sheet -->
-    <link rel="stylesheet" href="./style.css">
+
     <!-- jQuery -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
     <script src='https://code.jquery.com/jquery.js'></script>
@@ -29,8 +28,8 @@
                         <div class="container">
                             <h1 class="display-4 text-white">Hot Restaurant</h1>
                             <p class="lead text-white">Make your reservation</p>
-                            <button class="btn btn-default" id="viewTableBtn"> View Table</button>
-                            <button class="btn btn-default" id="reservBtn"> Home</button>
+                            <a class="btn btn-default" id="viewTableBtn" href="./tables" role="button">View Table</a>
+                            <a class="btn btn-default" id="homeBtn" href="/" role="button">Home</a>
                         </div>
                     </div>
                 </div>
@@ -42,39 +41,58 @@
 
                 <form>
 
-                    <div class="input-field col s12">
-                        <input type="text" class="validate" id="name">
-                        <label for="">Name</label>
-                    </div>
+                    <div class="form-group row">
 
-                    <div class="input-field col s12">
-                        <input type="number" class="validate" id="phone-number">
-                        <label for="">Phone Number</label>
-                    </div>
+                        <label for="title">Name</label>
+                        <textarea class="form-control validate" id="name" rows="3"></textarea>
 
-                    <div class="input-field col s12">
-                        <input type="text" class="validate" id="email">
-                        <label for="">Email</label>
-                    </div>
+                        <label for="title">Email</label>
+                        <textarea class="form-control validate" id="email" rows="3"></textarea>
 
-                    <div class="input-field col s12">
-                        <input type="number" class="validate" id="unique-id">
-                        <label for="">Unique ID</label>
-                    </div>
+                        <label for="title">Phone</label>
+                        <textarea class="form-control validate" id="phone-number" rows="3"></textarea>
 
-                    <button type="button" class="btn waves-effect waves-light" id="submit">Submit</button>
+                        <label for="title">Unique ID</label>
+                        <textarea class="form-control validate" id="unique-id" rows="3"></textarea>
+
+                    </div>
+                    <button type="button" class="btn waves-effect waves-light" id="rserve-submit">Submit</button>
                 </form>
 
             </div>
 
             <div class="col-lg-12">
                 <br>
-                <a href="api/reservations">API Table Link</a> ||
-                <a href="api/waitlist">API Waitlist</a>
+                <a href="api/reservation">API Table Link</a> ||
+                <a href="api/waitlist">API Wait List</a>
 
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+
+        $("#rserve-submit").on("click", function (event) {
+            event.preventDefault();
+            var newReservation = {
+                name: $("#name").val().trim(),
+                phoneumber: $("#phone-number").val().trim(),
+                email: $("#email").val().trim(),
+                uniqueId: $("#unique-id").val().trim()
+            };
+
+            $.post("/api/reservations", newReservation)
+                .then(function (err, data) {
+                    if (err) {
+                        alert("Please input your info for reservation");
+                    }
+                    console.log("reserve.html", data);
+                    alert("Adding reservation.");
+                });
+        });
+
+    </script>
 </body>
 
-</html> 
+</html>
+

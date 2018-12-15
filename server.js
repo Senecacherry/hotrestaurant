@@ -57,7 +57,21 @@ app.get("/api/waitlist", function (req, res) {
     return res.json(waitlist);
 });
 
-//create routes for posting data
+app.post("/api/reservations", function(req, res) {
+    // req.body hosts is equal to the JSON post sent from the user
+    // This works because of our body parsing middleware
+    var newReservation = req.body;
+  
+    console.log(reservations.length);
+  
+    if (reservations.length < 5) {
+        reservations.push(newReservation);
+      } else {
+          waitlist.push(newReservation);
+      };
+  
+    res.json(newReservation);
+  });
 
 //listening
 app.listen(PORT, function () {
