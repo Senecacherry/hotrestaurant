@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hot Restaurant</title>
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=BioRhyme" rel="stylesheet">
+    <!-- CSS Style sheet -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- jQuery -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <script src='https://code.jquery.com/jquery.js'></script>
+    <!-- Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+
+
+<body>
+    <style>
+        .well {
+            background-color: rgb(224, 223, 223);
+            padding: 10px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="jumbotron jumbotron-fluid bg-dark text-center">
+                        <div class="container">
+                            <h1 class="display-4 text-white">Hot Restaurant</h1>
+                            <p class="lead text-white">Current Reservations and Waiting List</p>
+                            <button class="btn btn-default" id="viewTableBtn"> Make Reservation</button>
+                            <button class="btn btn-default" id="reservBtn"> Home</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Current Reservations</h4>
+                    </div>
+
+                    <div class="panel-body" id="ReserveTableSection">
+                        <div class="well" id="tableWell-01">
+                            <h2><span class="label label-primary">1</span> | reservation sample table</h2>
+                        </div>
+                        <br>
+                        <div class="well" id="tableWell-01">
+                            <h2><span class="label label-primary">2</span> | reservation sample table</h2>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="panel-body" id="waitingTableSection">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Waiting List</h4>
+                        </div>
+                        <div class="well" id="tableWell-01">
+                            <h2><span class="label label-primary">1</span> | waiting list sample table</h2>
+                        </div>
+                        <br>
+                        <div class="well" id="tableWell-01">
+                            <h2><span class="label label-primary">2</span> | waiting list sample table</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <br>
+                <a href="api/reservations">API Table Link</a> ||
+                <a href="api/waitlist">API Waitlist</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
+
+Co
