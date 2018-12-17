@@ -7,7 +7,6 @@
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=BioRhyme" rel="stylesheet">
-
     <!-- jQuery -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
     <script src='https://code.jquery.com/jquery.js'></script>
@@ -17,9 +16,7 @@
 </head>
 
 
-
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -56,14 +53,14 @@
                         <textarea class="form-control validate" id="unique-id" rows="3"></textarea>
 
                     </div>
-                    <button type="button" class="btn waves-effect waves-light" id="rserve-submit">Submit</button>
+                    <button type="button" class="btn waves-effect waves-light" id="reserve-submit">Submit</button>
                 </form>
 
             </div>
 
             <div class="col-lg-12">
                 <br>
-                <a href="api/reservation">API Table Link</a> ||
+                <a href="api/reservations">API Table Link</a> ||
                 <a href="api/waitlist">API Wait List</a>
 
             </div>
@@ -72,27 +69,32 @@
 
     <script type="text/javascript">
 
-        $("#rserve-submit").on("click", function (event) {
+        $("#reserve-submit").on("click", function (event) {
             event.preventDefault();
             var newReservation = {
-                name: $("#name").val().trim(),
-                phoneumber: $("#phone-number").val().trim(),
-                email: $("#email").val().trim(),
-                uniqueId: $("#unique-id").val().trim()
+                customerName: $("#name").val().trim(),
+                phoneNumber: $("#phone-number").val().trim(),
+                customerEmail: $("#email").val().trim(),
+                customerID: $("#unique-id").val().trim()
             };
 
             $.post("/api/reservations", newReservation)
                 .then(function (err, data) {
-                    if (err) {
-                        alert("Please input your info for reservation");
-                    }
+                    // if (err) {
+                    //     alert("Please input your info for reservation");
+                    // }
                     console.log("reserve.html", data);
                     alert("Adding reservation.");
+
+                    $("#name").val("");
+                    $("#phone-number").val("");
+                    $("#email").val("");
+                    $("#unique-id").val("");
                 });
+
         });
 
     </script>
 </body>
 
 </html>
-

@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Hot Restaurant</title>
-
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=BioRhyme" rel="stylesheet">
     <!-- jQuery -->
@@ -22,6 +21,11 @@
         .well {
             background-color: rgb(224, 223, 223);
             padding: 10px;
+        }
+
+        ol{
+            font-size: 24px;
+            padding-bottom: 7px;
         }
     </style>
 
@@ -44,20 +48,14 @@
 
         <div class="row">
             <div class="col-lg-12">
-
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">Current Reservations</h4>
                     </div>
-
                     <div class="panel-body" id="ReserveTableSection">
-                        <div class="well" id="tableWell-01">
-                            <h2><span class="label reserve1">1</span> | reservation sample table</h2>
+                        <div class="well" id="reserveName-here">
                         </div>
                         <br>
-                        <div class="well" id="tableWell-01">
-                            <h2><span class="label label-primary">2</span> | reservation sample table</h2>
-                        </div>
                     </div>
                     <br>
                     <br>
@@ -65,13 +63,9 @@
                         <div class="panel-heading">
                             <h4 class="panel-title">Waiting List</h4>
                         </div>
-                        <div class="well" id="tableWell-01">
-                            <h2><span class="label label-primary">1</span> | waiting list sample table</h2>
+                        <div class="well" id="waitlistName-here">
                         </div>
                         <br>
-                        <div class="well" id="tableWell-01">
-                            <h2><span class="label label-primary">2</span> | waiting list sample table</h2>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -80,7 +74,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <br>
-                <a href="api/reservation">API Table Link</a> ||
+                <a href="api/reservations">API Table Link</a> ||
                 <a href="api/waitlist">API Wait List</a>
             </div>
         </div>
@@ -89,24 +83,34 @@
 
     <script type="text/javascript">
 
-
-        var newuniqueID = $("#unique-id").val().trim();
-
-        newuniqueID = newuniqueID.replace(/\s+/g, "").toLowerCase();
-
-        $.get("/reservations" + search, function (data) {
-            console.log(data);
+        $.get("/api/reservations", function (data) {
             if (data) {
-                uniqueId: $("#unique-id").val().trim()
-
-                $("#tableWell-01").push(data.uniqueId);
+                var reserveName = "";
+                var cardDiv = $("<ol>");
+                for (var i = 0; i < data.length; i++) {
+                    cardDiv.append("<li>" + data[i].customerName + "</li>");
+                    $("#reserveName-here").prepend(cardDiv);
+                }
             }
             else {
                 $("#stats").hide();
             }
         });
-       
 
+        $.get("/api/waitlist", function (data) {
+            if (data) {
+                var waitlistNames = "";
+                var cardDivTwo = $("<ol>");
+                for (var i = 0; i < data.length; i++) {
+                    waitlistNames += data[i].customerName + " ";
+                    cardDivTwo.append("<li>" + data[i].customerName + "</li>");
+                    $("#waitlistName-here").prepend(cardDivTwo);
+                }
+            }
+            else {
+                $("#stats").hide();
+            }
+        });
 
     </script>
 
